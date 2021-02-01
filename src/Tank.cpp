@@ -215,10 +215,20 @@ void Tank::m_Arrive()
 
 	getRigidBody()->acceleration = getOrientation() * getAccelerationRate();
 
-	// using the formula pf = pi + vi*t + 0.5ai*t^2
-	getRigidBody()->velocity += getOrientation() * (deltaTime)+
-		0.5f * getRigidBody()->acceleration * (deltaTime);
-
+	//if ()
+//	{
+		// using the formula pf = pi + vi*t + 0.5ai*t^2
+		getRigidBody()->velocity += getOrientation() * (deltaTime)+
+			0.5f * getRigidBody()->acceleration * (deltaTime);
+//	}
+	/*
+	else if ()
+	{
+		// using the formula pf = pi + vi*t + 0.5ai*t^2
+		getRigidBody()->velocity += getOrientation() * (deltaTime)-
+			0.5f * getRigidBody()->acceleration * (deltaTime);
+	}
+	*/
 	getRigidBody()->velocity = Util::clamp(getRigidBody()->velocity, m_maxSpeed);
 
 	getTransform()->position += getRigidBody()->velocity;

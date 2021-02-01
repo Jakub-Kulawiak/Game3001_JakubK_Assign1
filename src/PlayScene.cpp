@@ -65,11 +65,23 @@ void PlayScene::start()
 	// Set GUI Title
 	m_guiTitle = "Play Scene";
 
+
+	const SDL_Color green = { 0, 255, 50, 255 };
+	m_pInstructions = new Label("To change AI behaviour use buttons in the Imgui menu.", "vgafix", 48, green, glm::vec2(400.0f, 40.0f));
+	m_pInstructions->setParent(this);
+	addChild(m_pInstructions);
+
+	m_pInstructions2 = new Label("Enabling objects and other functions are also done through Imgui.", "vgafix", 48, green, glm::vec2(400.0f, 60.0f));
+	m_pInstructions2->setParent(this);
+	addChild(m_pInstructions2);
+	
 	m_pTarget = new Target();
+	m_pTarget->setEnabled(false);
 	m_pTarget->getTransform()->position = glm::vec2(700.0f, 300.0f);
 	addChild(m_pTarget);
 	
 	m_pObstacle = new Obstacle();
+	m_pObstacle->setEnabled(false);
 	m_pObstacle->getTransform()->position = glm::vec2(500.0f, 300.0f);
 	addChild(m_pObstacle);
 
@@ -140,6 +152,9 @@ void PlayScene::GUI_Function() const
 		acceleration_rate = 2.0f;
 		speed = 10.0f;
 		angleInRadians = m_pTank->getRotation();
+
+		m_pObstacle->setEnabled(false);
+		m_pTarget->setEnabled(false);
 	}
 	
 	ImGui::SameLine();
@@ -156,6 +171,26 @@ void PlayScene::GUI_Function() const
 		m_pTank->setState(1);
 	}
 
+	if(ImGui::Button("Target"))
+	{
+		m_pTarget->setEnabled(true);
+	}
+
+	ImGui::SameLine();
+
+	if(ImGui::Button("Obstacle"))
+	{
+		m_pObstacle->setEnabled(true);
+	}
+	
+	ImGui::SameLine();
+
+	if(ImGui::Button("Instructions"))
+	{
+		m_pInstructions->setEnabled(false);
+		m_pInstructions2->setEnabled(false);
+	}
+	
 	ImGui::Separator();
 
 	static float targetPosition[2] = { m_pTarget->getTransform()->position.x, m_pTarget->getTransform()->position.y};

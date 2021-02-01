@@ -30,6 +30,9 @@ private:
 	
 	glm::vec2 m_mousePosition;
 
+	Label* m_pInstructions;
+	Label* m_pInstructions2;
+
 	SpaceShip* m_pSpaceShip;
 	Tank* m_pTank;
 	Target* m_pTarget;
