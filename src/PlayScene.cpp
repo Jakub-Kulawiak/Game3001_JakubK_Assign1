@@ -66,6 +66,13 @@ void PlayScene::start()
 	m_guiTitle = "Play Scene";
 
 
+	SoundManager::Instance().load("../Assets/audio/straight.mp3", "music", SOUND_MUSIC);
+	SoundManager::Instance().playMusic("music", -1, 0);
+	SoundManager::Instance().setMusicVolume(20);
+
+
+	// Object rel
+	
 	const SDL_Color green = { 0, 255, 50, 255 };
 	m_pInstructions = new Label("To change AI behaviour use buttons in the Imgui menu.", "vgafix", 48, green, glm::vec2(400.0f, 40.0f));
 	m_pInstructions->setParent(this);
@@ -171,6 +178,13 @@ void PlayScene::GUI_Function() const
 		m_pTank->setState(1);
 	}
 
+	ImGui::SameLine();
+	
+	if(ImGui::Button("Arrive"))
+	{
+		m_pTank->setState(2);
+	}
+	
 	if(ImGui::Button("Target"))
 	{
 		m_pTarget->setEnabled(true);

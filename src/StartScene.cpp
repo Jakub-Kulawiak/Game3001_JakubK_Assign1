@@ -50,9 +50,9 @@ void StartScene::start()
 	m_pStartLabel->setParent(this);
 	addChild(m_pStartLabel);
 
-	//m_pInstructionsLabel = new Label("Press 1 to Play", "vgafix", 48, green, glm::vec2(400.0f, 120.0f));
-	//m_pInstructionsLabel->setParent(this);
-	//addChild(m_pInstructionsLabel);
+	m_pNote = new Label("In terms of music I was going for a tech demo feel", "vgafix", 48, green, glm::vec2(400.0f, 560.0f));
+	m_pNote->setParent(this);
+	addChild(m_pNote);
 	
 	m_pName = new Label("Jakub Kulawiak", "vgafix", 36, green, glm::vec2(400.0f, 200.0f));
 	m_pName->setParent(this);

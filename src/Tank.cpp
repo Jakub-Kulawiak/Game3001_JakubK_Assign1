@@ -24,6 +24,7 @@ Tank::Tank()
 	setRotation(0.0f);
 	setAccelerationRate(10.0f);
 	setTurnRate(10.0f);
+	
 }
 
 Tank::~Tank() = default;
@@ -82,6 +83,11 @@ void Tank::setRotation(const float angle)
 
 	// convert the angle to a normalized vector and store it in Orientation
 	setOrientation(glm::vec2(x, y));
+}
+
+float Tank::getDistance(glm::vec2 obj1, glm::vec2 obj2)
+{
+	return sqrt(pow((obj2.y - obj1.y), 2) + pow((obj2.x - obj1.x), 2));
 }
 
 float Tank::getTurnRate() const
@@ -193,7 +199,7 @@ void Tank::m_Arrive()
 
 	// direction with magnitude
 	m_targetDirection = m_destination - getTransform()->position;
-
+	
 	// normalized direction
 	m_targetDirection = Util::normalize(m_targetDirection);
 
@@ -215,20 +221,22 @@ void Tank::m_Arrive()
 
 	getRigidBody()->acceleration = getOrientation() * getAccelerationRate();
 
-	//if ()
-//	{
+	if (getDistance(m_destination, getTransform()->position) > 100.0f)
+	{
+		
 		// using the formula pf = pi + vi*t + 0.5ai*t^2
 		getRigidBody()->velocity += getOrientation() * (deltaTime)+
 			0.5f * getRigidBody()->acceleration * (deltaTime);
-//	}
-	/*
-	else if ()
-	{
-		// using the formula pf = pi + vi*t + 0.5ai*t^2
-		getRigidBody()->velocity += getOrientation() * (deltaTime)-
-			0.5f * getRigidBody()->acceleration * (deltaTime);
 	}
-	*/
+	
+	else if (getDistance(m_destination, getTransform()->position) <= 10.0f)
+	{
+		getRigidBody()->velocity = getOrientation() * (0.0f)-
+			0.0f * getRigidBody()->acceleration * (0.0f);
+	}
+
+
+	
 	getRigidBody()->velocity = Util::clamp(getRigidBody()->velocity, m_maxSpeed);
 
 	getTransform()->position += getRigidBody()->velocity;

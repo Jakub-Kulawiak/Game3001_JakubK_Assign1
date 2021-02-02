@@ -31,9 +31,10 @@ public:
 	void setAccelerationRate(float rate);
 	int getState();
 	void setState(int state);
+	float getDistance(glm::vec2 obj1, glm::vec2 obj2);
 
 private:
-
+	
 	glm::vec2 m_destination;
 	glm::vec2 m_targetDirection;
 	glm::vec2 m_orientation;
@@ -42,7 +43,7 @@ private:
 	float m_turnRate;
 	float m_accelerationRate;
 	int m_movementState;
-
+	
 	// private function
 	void m_Seek();
 	void m_Flee();

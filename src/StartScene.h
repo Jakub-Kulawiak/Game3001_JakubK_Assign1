@@ -26,7 +26,8 @@ private:
 	Label* m_pInstructionsLabel{};
 	Label* m_pName{};
 	Label* m_pStuID{};
-
+	Label* m_pNote{};
+	
 	Ship* m_pShip{};
 	Cartridge* m_pCartridge;
 
